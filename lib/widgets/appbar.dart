@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// ─── Reusable AppBar ─────────────────────────────────────────────────────────
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -17,7 +16,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Text(
+          title,
+          style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold)),
       actions: [
         Switch(
           value: isDarkMode,

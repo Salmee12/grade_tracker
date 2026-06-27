@@ -59,12 +59,6 @@ class SubjectlistPage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('${subject.name} deleted'),
-                    action: SnackBarAction(
-                      label: 'Undo',
-                      onPressed: () {
-                        // Optional: Add undo functionality later
-                      },
-                    ),
                   ),
                 );
               },
