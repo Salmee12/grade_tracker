@@ -1,16 +1,68 @@
-# grade_tracker
+# Subject Tracker
 
-A Flutter app where a student can add subjects with marks, see grades, and view a result summary
+A clean and modern Flutter app to track student subjects, marks, and grades.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Add Subjects**: Input subject name and mark (0–100)
+- **Duplicate Prevention**: Prevents adding subjects with the same name
+- **Grade System**: Automatic grade calculation (A, B, C, F)
+- **Subject List**: View all subjects with swipe-to-delete functionality
+- **Summary Dashboard**: 
+  - Total subjects, passing & failing count
+  - Average mark
+  - Grade distribution with progress bars
+- **Dark Mode Support**: Beautiful light & dark themes
+- **Responsive UI**: Works well on different screen sizes
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Provider (State Management)
+- Material 3 Design
+
+## Project Structure
+lib/
+├── main.dart
+├── provider/
+│   └── subject_provider.dart
+|   └── appstate_provider.dart     # Navigation & Theme state
+├── models/
+│   └── Subject.dart
+├── pages/
+│   ├── main_screen.dart
+│   ├── subject_page.dart
+│   ├── subjectlist_page.dart
+│   └── summary_page.dart
+└── widgets/
+     └── appbar.dart
+
+
+
+## How to Run the App
+
+### Prerequisites
+
+- Flutter SDK installed (`flutter --version`)
+- Android Studio / VS Code
+- Android Emulator or iOS Simulator / Physical Device
+
+### Steps
+
+1. **Clone or Download** the project
+
+2. **Navigate to project folder**:
+   ```bash
+   cd subject-tracker
+3. **Install dependencies and Run the app::
+   '''Bash
+      flutter pub get
+      flutter run
+## How to Use
+
+-Go to "Add Subject" tab
+-Enter Subject Name and Mark → Tap Add Subject
+-View all entries in "Subject List" tab (swipe left to delete)
+-Check statistics and grade distribution in "Summary" tab
+-Toggle between Light and Dark mode using the switch in the AppBar
