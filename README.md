@@ -23,6 +23,7 @@ A clean and modern Flutter app to track student subjects, marks, and grades.
 - Material 3 Design
 
 ## Project Structure
+```
 lib/
 ├── main.dart
 ├── provider/
@@ -37,6 +38,8 @@ lib/
 │   └── summary_page.dart
 └── widgets/
      └── appbar.dart
+
+ ```
 
 
 
@@ -56,7 +59,7 @@ lib/
    ```bash
    cd subject-tracker
 3. **Install dependencies and Run the app::
-   '''Bash
+   ```bash
       flutter pub get
       flutter run
 ## How to Use
