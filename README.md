@@ -64,8 +64,8 @@ lib/
       flutter run
 ## How to Use
 
--Go to "Add Subject" tab
--Enter Subject Name and Mark → Tap Add Subject
--View all entries in "Subject List" tab (swipe left to delete)
--Check statistics and grade distribution in "Summary" tab
--Toggle between Light and Dark mode using the switch in the AppBar
+**-Go to "Add Subject" tab
+**-Enter Subject Name and Mark → Tap Add Subject
+**-View all entries in "Subject List" tab (swipe left to delete)
+**-Check statistics and grade distribution in "Summary" tab
+**-Toggle between Light and Dark mode using the switch in the AppBar
