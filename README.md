@@ -66,9 +66,9 @@ lib/
 
 ## Steps
 
-1. **Go to "Add Subject" tab
+1. Go to "Add Subject" tab
 
-2. **Enter Subject Name and Mark → Tap Add Subject
-3. **View all entries in "Subject List" tab (swipe left to delete)
-4. **Check statistics and grade distribution in "Summary" tab
-5. **Toggle between Light and Dark mode using the switch in the AppBar
+2. Enter Subject Name and Mark → Tap Add Subject
+3. View all entries in "Subject List" tab (swipe left to delete)
+4. Check statistics and grade distribution in "Summary" tab
+5. Toggle between Light and Dark mode using the switch in the AppBar
