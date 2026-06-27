@@ -91,8 +91,8 @@ class MyApp extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.white,
-        selectedItemColor: primaryColor,
+        backgroundColor: Colors.lightGreen,
+        selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey[600],
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         elevation: 8,
@@ -183,7 +183,8 @@ class MyApp extends StatelessWidget {
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.white,
+
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );

@@ -9,125 +9,133 @@ class SummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SubjectProvider>(
-      builder: (context, provider, child) {
-        final total = provider.totalSubjects;
-        final passing = provider.passingCount;
-        final average = provider.averageMark;
-
-        final failing = total - passing;
-
-        if (total == 0) {
-          return const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.school_outlined, size: 80, color: Colors.grey),
-                SizedBox(height: 16),
-                Text(
-                  'No data yet',
-                  style: TextStyle(fontSize: 20),
-                ),
-                Text('Add some subjects first'),
-              ],
-            ),
-          );
-        }
-
-        return Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Summary',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 24),
-
-              // Statistics Cards
-              Row(
+    return  Consumer<SubjectProvider>(
+        builder: (context, provider, child) {
+          final total = provider.totalSubjects;
+          final passing = provider.passingCount;
+          final average = provider.averageMark;
+      
+          final failing = total - passing;
+      
+          if (total == 0) {
+            return const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: _StatCard(
-                      title: 'Total Subjects',
-                      value: total.toString(),
-                      color: Colors.blue,
-                    ),
+                  Icon(Icons.school_outlined, size: 80, color: Colors.grey),
+                  SizedBox(height: 16),
+                  Text(
+                    'No data yet',
+                    style: TextStyle(fontSize: 20),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _StatCard(
-                      title: 'Passing',
-                      value: '$passing (${(passing / total * 100).toStringAsFixed(1)}%)',
-                      color: Colors.green,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _StatCard(
-                      title: 'Failing',
-                      value: failing.toString(),
-                      color: Colors.red,
-                    ),
-                  ),
+                  Text('Add some subjects first'),
                 ],
               ),
+            );
+          }
 
-              const SizedBox(height: 24),
-              const Text('Average Mark', style: TextStyle(fontSize: 18)),
-              Text(
-                '${average.toStringAsFixed(1)} / 100',
-                style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-              ),
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Summary',
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 24),
 
-              const SizedBox(height: 24),
-              const Text('Grade Distribution', style: TextStyle(fontSize: 18)),
+                // Statistics Cards
+                Row(
+                  children: [
+                    Expanded(
+                      child: _StatCard(
+                        title: 'Total Subjects',
+                        value: total.toString(),
+                        color: Colors.blue,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _StatCard(
+                        title: 'Passing',
+                        value: '$passing (${(passing / total * 100).toStringAsFixed(1)}%)',
+                        color: Colors.green,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _StatCard(
+                        title: 'Failing',
+                        value: failing.toString(),
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
 
-              // Grade Distribution using .map()
-              ...provider.subjects
-                  .map((s) => s.grade)
-                  .toSet() // unique grades
-                  .map((grade) {
-                final count = provider.subjects.where((s) => s.grade == grade).length;
-                return ListTile(
-                  leading: Text(grade, style: const TextStyle(fontSize: 24)),
-                  title: LinearProgressIndicator(
-                    value: count / total,
-                    backgroundColor: Colors.grey[300],
-                    color: _getGradeColor(grade),
-                  ),
-                  trailing: Text('$count'),
-                );
-              }).toList(),
+                const SizedBox(height: 24),
+                const Text('Average Mark', style: TextStyle(fontSize: 18)),
+                Text(
+                  '${average.toStringAsFixed(1)} / 100',
+                  style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                ),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 24),
+                const Text('Grade Distribution', style: TextStyle(fontSize: 18)),
 
-              // All Subjects with grades using .map()
-              const Text('All Subjects', style: TextStyle(fontSize: 18)),
-              Expanded(
-                child: ListView(
-                  children: provider.subjects.map((subject) {
-                    return ListTile(
-                      dense: true,
+                // Grade Distribution
+                ...provider.subjects
+                    .map((s) => s.grade)
+                    .toSet()
+                    .map((grade) {
+                  final count = provider.subjects.where((s) => s.grade == grade).length;
+                  return ListTile(
+                    leading: Text(grade, style: const TextStyle(fontSize: 24)),
+                    title: LinearProgressIndicator(
+                      value: count / total,
+                      backgroundColor: Colors.grey[300],
+                      color: _getGradeColor(grade),
+                    ),
+                    trailing: Text('$count'),
+                  );
+                }).toList(),
+
+                const SizedBox(height: 24),
+
+                // All Subjects
+                const Text('All Subjects', style: TextStyle(fontSize: 18)),
+                const SizedBox(height: 8),
+
+                // Replaced inner ListView with Column + map for better scroll behavior
+                ...provider.subjects.map((subject) {
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: ListTile(
                       title: Text(subject.name),
                       subtitle: Text('${subject.mark} marks'),
                       trailing: Text(
                         subject.grade,
                         style: TextStyle(
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: _getGradeColor(subject.grade),
                         ),
                       ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+                    ),
+                  );
+                }).toList(),
+
+                const SizedBox(height: 40), // Extra space at bottom
+              ],
+            ),
+          );
+        },
     );
+      
+      
+
+
   }
 
   Color _getGradeColor(String grade) {

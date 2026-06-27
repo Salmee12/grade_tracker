@@ -23,16 +23,22 @@ class _SubjectPageState extends State<SubjectPage> {
     _markController.dispose();
     super.dispose();
   }
-
+// Check if subject already exists
+  bool _subjectExists(String name) {
+    final provider = Provider.of<SubjectProvider>(context, listen: false);
+    return provider.subjects.any(
+          (subject) => subject.name.toLowerCase() == name.toLowerCase().trim(),
+    );
+  }
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       final name = _nameController.text.trim();
       final mark = double.parse(_markController.text.trim());
 
       final subject = Subject(name: name, mark: mark);
-
       // Add using Provider
       Provider.of<SubjectProvider>(context, listen: false).addSubject(subject);
+
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('✅ Added: $name')),
@@ -65,7 +71,15 @@ class _SubjectPageState extends State<SubjectPage> {
                   labelText: 'Subject Name',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) => value?.trim().isEmpty == true ? 'Required' : null,
+                validator: (value) {
+                  if (value?.trim().isEmpty == true) return 'Required';
+                  if (_subjectExists(value!)) {
+                    return 'Subject with this name already exists';
+                  }
+
+                  return null;
+
+                },
               ),
               const SizedBox(height: 12),
               TextFormField(

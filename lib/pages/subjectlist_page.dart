@@ -22,8 +22,8 @@ class SubjectlistPage extends StatelessWidget {
             final subject = provider.subjects[index];
 
             return Dismissible(
-              key: Key(subject.name + index.toString()), // Unique key
-              direction: DismissDirection.endToStart,   // Swipe from right to left
+              key: Key(subject.name + index.toString()),
+              direction: DismissDirection.endToStart,
               background: Container(
                 alignment: Alignment.centerRight,
                 padding: const EdgeInsets.only(right: 20),
@@ -69,13 +69,20 @@ class SubjectlistPage extends StatelessWidget {
                   subtitle: Text('Mark: ${subject.mark} | Grade: ${subject.grade}'),
                   trailing: Text(
                     subject.grade,
-                    style: const TextStyle(
-                      fontSize: 20,
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                    ),
+                      color: subject.grade == 'A'
+                          ? Colors.green
+                          : subject.grade == 'B'
+                              ? Colors.lightGreen
+                              : subject.grade == 'C'
+                                  ? Colors.orange
+                                  : Colors.red,
                   ),
                 ),
+
               ),
+             )
             );
           },
         );
